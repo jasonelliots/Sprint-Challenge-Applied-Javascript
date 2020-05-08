@@ -19,163 +19,217 @@
 //
 // Use your function to create a card for each of the articles and add the card to the DOM.
 
-const cardsContainer = document.querySelector('.cards-container')
+const cardsContainer = document.querySelector(".cards-container");
 
-function cardCreator(){
+function dryCardCreator(articleObj) {
+  const { headline, authorPhoto, authorName } = articleObj;
 
-    axios.get('https://lambda-times-backend.herokuapp.com/articles')
-    
-    .then(response => {
-        console.log(response)
-        response.data.articles.javascript.forEach(article => {
+  const cardDiv = document.createElement("div");
+  const headlineDiv = document.createElement("div");
+  const authorDiv = document.createElement("div");
+  const imgDiv = document.createElement("div");
+  const authorImg = document.createElement("img");
+  const author = document.createElement("span");
 
-            const cardDiv = document.createElement("div")
-            const headlineDiv = document.createElement("div")
-            const authorDiv = document.createElement("div")
-            const imgDiv = document.createElement("div")
-            const authorImg = document.createElement("img")
-            const authorName = document.createElement("span")
-        
-            cardDiv.appendChild(headlineDiv)
-            cardDiv.appendChild(authorDiv)
-            authorDiv.appendChild(imgDiv)
-            authorDiv.appendChild(authorName)
-            imgDiv.appendChild(authorImg)
-        
-            cardDiv.classList.add('card')
-            headlineDiv.classList.add('headline')
-            authorDiv.classList.add('author')
-            imgDiv.classList.add('img-container')
+  cardDiv.appendChild(headlineDiv);
+  cardDiv.appendChild(authorDiv);
+  authorDiv.appendChild(imgDiv);
+  authorDiv.appendChild(author);
+  imgDiv.appendChild(authorImg);
 
-            headlineDiv.textContent = article.headline
-            authorImg.src = article.authorPhoto
-            authorName.textContent = article.authorName
+  cardDiv.classList.add("card");
+  headlineDiv.classList.add("headline");
+  authorDiv.classList.add("author");
+  imgDiv.classList.add("img-container");
 
-            // console.log(cardDiv)
+  headlineDiv.textContent = headline;
+  authorImg.src = authorPhoto;
+  author.textContent = authorName;
 
-            cardsContainer.appendChild(cardDiv)
-        })
+  // console.log(cardDiv)
 
-        response.data.articles.node.forEach(article => {
-
-            const cardDiv = document.createElement("div")
-            const headlineDiv = document.createElement("div")
-            const authorDiv = document.createElement("div")
-            const imgDiv = document.createElement("div")
-            const authorImg = document.createElement("img")
-            const authorName = document.createElement("span")
-        
-            cardDiv.appendChild(headlineDiv)
-            cardDiv.appendChild(authorDiv)
-            authorDiv.appendChild(imgDiv)
-            authorDiv.appendChild(authorName)
-            imgDiv.appendChild(authorImg)
-        
-            cardDiv.classList.add('card')
-            headlineDiv.classList.add('headline')
-            authorDiv.classList.add('author')
-            imgDiv.classList.add('img-container')
-
-            headlineDiv.textContent = article.headline
-            authorImg.src = article.authorPhoto
-            authorName.textContent = article.authorName
-
-            // console.log(cardDiv)
-
-            cardsContainer.appendChild(cardDiv)
-
-        })
-
-        response.data.articles.jquery.forEach(article => {
-
-            const cardDiv = document.createElement("div")
-            const headlineDiv = document.createElement("div")
-            const authorDiv = document.createElement("div")
-            const imgDiv = document.createElement("div")
-            const authorImg = document.createElement("img")
-            const authorName = document.createElement("span")
-        
-            cardDiv.appendChild(headlineDiv)
-            cardDiv.appendChild(authorDiv)
-            authorDiv.appendChild(imgDiv)
-            authorDiv.appendChild(authorName)
-            imgDiv.appendChild(authorImg)
-        
-            cardDiv.classList.add('card')
-            headlineDiv.classList.add('headline')
-            authorDiv.classList.add('author')
-            imgDiv.classList.add('img-container')
-
-            headlineDiv.textContent = article.headline
-            authorImg.src = article.authorPhoto
-            authorName.textContent = article.authorName
-
-            // console.log(cardDiv)
-
-            cardsContainer.appendChild(cardDiv)
-
-        })
-        response.data.articles.bootstrap.forEach(article => {
-
-            const cardDiv = document.createElement("div")
-            const headlineDiv = document.createElement("div")
-            const authorDiv = document.createElement("div")
-            const imgDiv = document.createElement("div")
-            const authorImg = document.createElement("img")
-            const authorName = document.createElement("span")
-        
-            cardDiv.appendChild(headlineDiv)
-            cardDiv.appendChild(authorDiv)
-            authorDiv.appendChild(imgDiv)
-            authorDiv.appendChild(authorName)
-            imgDiv.appendChild(authorImg)
-        
-            cardDiv.classList.add('card')
-            headlineDiv.classList.add('headline')
-            authorDiv.classList.add('author')
-            imgDiv.classList.add('img-container')
-
-            headlineDiv.textContent = article.headline
-            authorImg.src = article.authorPhoto
-            authorName.textContent = article.authorName
-
-            // console.log(cardDiv)
-
-            cardsContainer.appendChild(cardDiv)
-
-        })
-
-        response.data.articles.technology.forEach(article => {
-
-            const cardDiv = document.createElement("div")
-            const headlineDiv = document.createElement("div")
-            const authorDiv = document.createElement("div")
-            const imgDiv = document.createElement("div")
-            const authorImg = document.createElement("img")
-            const authorName = document.createElement("span")
-        
-            cardDiv.appendChild(headlineDiv)
-            cardDiv.appendChild(authorDiv)
-            authorDiv.appendChild(imgDiv)
-            authorDiv.appendChild(authorName)
-            imgDiv.appendChild(authorImg)
-        
-            cardDiv.classList.add('card')
-            headlineDiv.classList.add('headline')
-            authorDiv.classList.add('author')
-            imgDiv.classList.add('img-container')
-
-            headlineDiv.textContent = article.headline
-            authorImg.src = article.authorPhoto
-            authorName.textContent = article.authorName
-
-            // console.log(cardDiv)
-
-            cardsContainer.appendChild(cardDiv)
-
-        })
-    })
-
+  cardsContainer.appendChild(cardDiv);
 }
 
-cardCreator() 
+axios.get("https://lambda-times-backend.herokuapp.com/articles")
+  .then((response) => {
+    // console.log(response);
+    response.data.articles.javascript.forEach((article) => {
+      dryCardCreator(article);
+    });
+    response.data.articles.node.forEach((article) => {
+      dryCardCreator(article);
+    });
+    response.data.articles.jquery.forEach((article) => {
+      dryCardCreator(article);
+    });
+    response.data.articles.bootstrap.forEach((article) => {
+      dryCardCreator(article);
+    });
+    response.data.articles.technology.forEach((article) => {
+      dryCardCreator(article);
+    });
+  });
+
+
+
+
+
+// function cardCreator(){
+
+//     axios.get('https://lambda-times-backend.herokuapp.com/articles')
+
+//     .then(response => {
+//         console.log(response)
+//         response.data.articles.javascript.forEach(article => {
+
+//             const cardDiv = document.createElement("div")
+//             const headlineDiv = document.createElement("div")
+//             const authorDiv = document.createElement("div")
+//             const imgDiv = document.createElement("div")
+//             const authorImg = document.createElement("img")
+//             const authorName = document.createElement("span")
+
+//             cardDiv.appendChild(headlineDiv)
+//             cardDiv.appendChild(authorDiv)
+//             authorDiv.appendChild(imgDiv)
+//             authorDiv.appendChild(authorName)
+//             imgDiv.appendChild(authorImg)
+
+//             cardDiv.classList.add('card')
+//             headlineDiv.classList.add('headline')
+//             authorDiv.classList.add('author')
+//             imgDiv.classList.add('img-container')
+
+//             headlineDiv.textContent = article.headline
+//             authorImg.src = article.authorPhoto
+//             authorName.textContent = article.authorName
+
+//             // console.log(cardDiv)
+
+//             cardsContainer.appendChild(cardDiv)
+//         })
+
+//         response.data.articles.node.forEach(article => {
+
+//             const cardDiv = document.createElement("div")
+//             const headlineDiv = document.createElement("div")
+//             const authorDiv = document.createElement("div")
+//             const imgDiv = document.createElement("div")
+//             const authorImg = document.createElement("img")
+//             const authorName = document.createElement("span")
+
+//             cardDiv.appendChild(headlineDiv)
+//             cardDiv.appendChild(authorDiv)
+//             authorDiv.appendChild(imgDiv)
+//             authorDiv.appendChild(authorName)
+//             imgDiv.appendChild(authorImg)
+
+//             cardDiv.classList.add('card')
+//             headlineDiv.classList.add('headline')
+//             authorDiv.classList.add('author')
+//             imgDiv.classList.add('img-container')
+
+//             headlineDiv.textContent = article.headline
+//             authorImg.src = article.authorPhoto
+//             authorName.textContent = article.authorName
+
+//             // console.log(cardDiv)
+
+//             cardsContainer.appendChild(cardDiv)
+
+//         })
+
+//         response.data.articles.jquery.forEach(article => {
+
+//             const cardDiv = document.createElement("div")
+//             const headlineDiv = document.createElement("div")
+//             const authorDiv = document.createElement("div")
+//             const imgDiv = document.createElement("div")
+//             const authorImg = document.createElement("img")
+//             const authorName = document.createElement("span")
+
+//             cardDiv.appendChild(headlineDiv)
+//             cardDiv.appendChild(authorDiv)
+//             authorDiv.appendChild(imgDiv)
+//             authorDiv.appendChild(authorName)
+//             imgDiv.appendChild(authorImg)
+
+//             cardDiv.classList.add('card')
+//             headlineDiv.classList.add('headline')
+//             authorDiv.classList.add('author')
+//             imgDiv.classList.add('img-container')
+
+//             headlineDiv.textContent = article.headline
+//             authorImg.src = article.authorPhoto
+//             authorName.textContent = article.authorName
+
+//             // console.log(cardDiv)
+
+//             cardsContainer.appendChild(cardDiv)
+
+//         })
+//         response.data.articles.bootstrap.forEach(article => {
+
+//             const cardDiv = document.createElement("div")
+//             const headlineDiv = document.createElement("div")
+//             const authorDiv = document.createElement("div")
+//             const imgDiv = document.createElement("div")
+//             const authorImg = document.createElement("img")
+//             const authorName = document.createElement("span")
+
+//             cardDiv.appendChild(headlineDiv)
+//             cardDiv.appendChild(authorDiv)
+//             authorDiv.appendChild(imgDiv)
+//             authorDiv.appendChild(authorName)
+//             imgDiv.appendChild(authorImg)
+
+//             cardDiv.classList.add('card')
+//             headlineDiv.classList.add('headline')
+//             authorDiv.classList.add('author')
+//             imgDiv.classList.add('img-container')
+
+//             headlineDiv.textContent = article.headline
+//             authorImg.src = article.authorPhoto
+//             authorName.textContent = article.authorName
+
+//             // console.log(cardDiv)
+
+//             cardsContainer.appendChild(cardDiv)
+
+//         })
+
+//         response.data.articles.technology.forEach(article => {
+
+//             const cardDiv = document.createElement("div")
+//             const headlineDiv = document.createElement("div")
+//             const authorDiv = document.createElement("div")
+//             const imgDiv = document.createElement("div")
+//             const authorImg = document.createElement("img")
+//             const authorName = document.createElement("span")
+
+//             cardDiv.appendChild(headlineDiv)
+//             cardDiv.appendChild(authorDiv)
+//             authorDiv.appendChild(imgDiv)
+//             authorDiv.appendChild(authorName)
+//             imgDiv.appendChild(authorImg)
+
+//             cardDiv.classList.add('card')
+//             headlineDiv.classList.add('headline')
+//             authorDiv.classList.add('author')
+//             imgDiv.classList.add('img-container')
+
+//             headlineDiv.textContent = article.headline
+//             authorImg.src = article.authorPhoto
+//             authorName.textContent = article.authorName
+
+//             // console.log(cardDiv)
+
+//             cardsContainer.appendChild(cardDiv)
+
+//         })
+//     })
+
+// }
+
+// cardCreator()
